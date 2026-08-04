@@ -1,0 +1,11 @@
+{
+    "display_name": "沉浸布局显示",
+    "loading_order": 100,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "extracted from LittleWhiteBox by RT15548",
+    "version": "1.0.0",
+    "homePage": "https://github.com/RT15548/LittleWhiteBox"
+}

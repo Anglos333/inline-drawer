@@ -1,0 +1,132 @@
+/* ==================== 沉浸式显示模式样式 ==================== */
+body.immersive-mode #chat {
+    padding: 0 !important;
+    border: 0px !important;
+    overflow-y: auto;
+    margin: 0 0px 0px 4px !important;
+    scrollbar-width: thin;
+    scrollbar-gutter: auto;
+}
+
+.immersive-top-group {
+    margin-top: 1em !important;
+}
+
+@media screen and (min-width: 1001px) {
+    body.immersive-mode #chat {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+    }
+
+    body.immersive-mode #chat::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+body.immersive-mode .mesAvatarWrapper {
+    margin-top: 1em;
+    padding-bottom: 0px;
+}
+
+body.immersive-mode .swipe_left,
+body.immersive-mode .swipeRightBlock {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    min-width: 1px !important;
+    min-height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    clip-path: inset(50%) !important;
+}
+
+body.immersive-mode .mes {
+    margin: 2% 0 0% 0 !important;
+}
+
+body.immersive-mode .ch_name {
+    padding-bottom: 5px;
+    border-bottom: 0.5px dashed color-mix(in srgb, var(--SmartThemeEmColor) 30%, transparent);
+}
+
+body.immersive-mode .mes_block {
+    padding-left: 0 !important;
+    margin: 0 0 5px 0 !important;
+}
+
+body.immersive-mode .mes_text {
+    padding: 0px !important;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 5px;
+}
+
+body.immersive-mode .mes {
+    width: 99%;
+    margin: 0 0.5%;
+    padding: 0px !important;
+}
+
+body.immersive-mode.immersive-all .mes.immersive-virtualized-message {
+    content-visibility: auto;
+    contain: layout paint style;
+    contain-intrinsic-size: auto var(--immersive-message-height, 220px);
+}
+
+body.immersive-mode .mes_buttons,
+body.immersive-mode .mes_edit_buttons {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+}
+
+body.immersive-mode .mes_buttons {
+    height: 20px;
+    overflow-x: clip;
+}
+
+body.immersive-mode .swipes-counter {
+    padding-left: 0px;
+    margin-bottom: 0 !important;
+}
+
+body.immersive-mode .flex-container.flex1.alignitemscenter {
+    min-height: 32px;
+}
+
+.immersive-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 5px;
+    opacity: 0.7;
+}
+
+.immersive-nav-btn {
+    color: var(--SmartThemeBodyColor);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: none;
+    border: none;
+    font-size: 12px;
+}
+
+.immersive-nav-btn:hover:not(:disabled) {
+    background-color: rgba(var(--SmartThemeBodyColor), 0.2);
+    transform: scale(1.1);
+}
+
+.immersive-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* 单楼层模式下锁定聊天区滚动，复刻原插件"滑不动"的沉浸体验 */
+body.immersive-mode.immersive-single #chat {
+    overflow: hidden !important;
+}
