@@ -125,8 +125,3 @@ body.immersive-mode .flex-container.flex1.alignitemscenter {
     opacity: 0.3;
     cursor: not-allowed;
 }
-
-/* 单楼层模式下锁定聊天区滚动，复刻原插件"滑不动"的沉浸体验 */
-body.immersive-mode.immersive-single #chat {
-    overflow: hidden !important;
-}

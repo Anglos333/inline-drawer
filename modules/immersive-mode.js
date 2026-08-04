@@ -124,6 +124,10 @@ function setupDOMObserver() {
             } else {
                 scheduleVirtualizationAfterChatRender('mutation');
             }
+
+            if (!getSettings().showAllMessages) {
+                updateMessageDisplay();
+            }
         }
 
         if (hasNewAI) {
@@ -464,6 +468,7 @@ function disableImmersiveMode() {
     $(SEL.mes).show();
     hideNavigationButtons();
     $('.swipe_left, .swipeRightBlock').show();
+    restoreHiddenChatElements();
     unbindMessageEvents();
     unbindSendFocusGuard();
     detachResizeObserver();
@@ -896,13 +901,37 @@ function showSingleModeMessages() {
 
         $targetAI.nextAll('.mes').show();
         addNavigationToLastTwoMessages();
+        hideNonVisibleChatElements();
     } else {
         const $lastMessages = $messages.slice(-2);
         if ($lastMessages.length) {
             $lastMessages.show();
             addNavigationToLastTwoMessages();
         }
+        hideNonVisibleChatElements();
     }
+}
+
+function hideNonVisibleChatElements() {
+    const chat = document.getElementById('chat');
+    if (!chat) return;
+    chat.querySelectorAll(':scope > *').forEach((el) => {
+        if (el.classList.contains('mes')) return;
+        if (el.getAttribute('data-immersive-hidden') === '1') return;
+        if (el.offsetHeight > 0) {
+            el.setAttribute('data-immersive-hidden', '1');
+            el.style.display = 'none';
+        }
+    });
+}
+
+function restoreHiddenChatElements() {
+    const chat = document.getElementById('chat');
+    if (!chat) return;
+    chat.querySelectorAll(':scope > [data-immersive-hidden="1"]').forEach((el) => {
+        el.removeAttribute('data-immersive-hidden');
+        if (el.style.display === 'none') el.style.display = '';
+    });
 }
 
 function addNavigationToLastTwoMessages() {
@@ -933,6 +962,7 @@ function updateMessageDisplay() {
     const settings = getSettings();
     if (settings.showAllMessages) {
         $messages.show();
+        restoreHiddenChatElements();
         addNavigationToLastTwoMessages();
         scheduleVirtualizationAfterChatRender('display');
     } else {
